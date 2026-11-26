@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cherry Mate AI — Moonlit Egyptian Sanctuary</title>
+<style>
+:root{--ink:#2b1b12;--muted:#80664a;--lav:#ead4a5;--pink:#f1dfc2;--purple:#176b66;--white:#fff}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:radial-gradient(ellipse at 50% 0%,#f4dfb4 0%,#ead4aa 42%,#d9c19a 100%);min-height:100vh}
+header{max-width:1080px;margin:auto;padding:25px 22px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #b99a6a}.brand{font-weight:900;font-size:1.42rem;letter-spacing:.3px;text-shadow:1px 1px #f4dfb4}.brand span{color:#a66b22}.tag{font-size:.82rem;color:var(--muted)}
+main{max-width:1080px;margin:15px auto 60px;padding:0 22px}.hero{position:relative;overflow:hidden;padding:42px 34px;border-radius:24px;background:linear-gradient(180deg,rgba(42,24,16,.15),rgba(42,24,16,.83)),radial-gradient(circle at 72% 30%,#f6c76e 0 11%,transparent 11.5%),linear-gradient(155deg,#9a6943 0%,#68452f 48%,#2e211b 100%);border:2px solid #b68b4e;box-shadow:0 16px 38px #4a2d172e;color:#fff8e9;min-height:340px}.eyebrow{color:#f2cf83;font-weight:750;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase}.hero h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.06;max-width:650px;margin:12px 0}.hero p{color:#f4e4c8;max-width:620px;line-height:1.7}.notice{font-size:.82rem;color:#e8d4b1;margin-top:15px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:20px}.card{background:linear-gradient(145deg,#f8edda,#ead7b5);border:1px solid #b99a6a;border-radius:18px;padding:23px;box-shadow:0 8px 24px #54351b20;position:relative}.card h2{font-size:1.15rem;margin:0 0 7px;color:#54351f}.sub{color:var(--muted);font-size:.9rem;line-height:1.5;margin:0 0 17px}.moods{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.mood{border:1px solid #c5a878;background:#fff8e9;border-radius:14px;padding:12px 4px;cursor:pointer;color:var(--ink)}.mood b{display:block;font-size:1.55rem}.mood small{font-size:.72rem}.mood.active{background:#e7d09b;border:2px solid #9c6a28}.result{background:#f1e2c3;border-radius:14px;padding:13px;margin-top:13px;line-height:1.55;min-height:48px}
+textarea,input{width:100%;border:1px solid #e5dfef;border-radius:13px;padding:13px;font:inherit;color:var(--ink);background:#fff;outline-color:#a99be5}textarea{min-height:105px;resize:vertical}button.primary{border:0;background:#167c78;color:white;border-radius:12px;padding:11px 17px;font-weight:700;cursor:pointer;margin-top:10px}button.secondary{border:1px solid #ded7ee;background:#fff;color:#5d4ba4;border-radius:12px;padding:10px 14px;font-weight:650;cursor:pointer}
+.chatlog{height:190px;overflow:auto;background:#f6ecd8;border-radius:14px;padding:12px;margin:12px 0;display:flex;flex-direction:column;gap:9px}.bubble{padding:10px 12px;border-radius:13px;max-width:90%;line-height:1.45;font-size:.9rem}.bot{background:#e2d0a8;align-self:flex-start}.user{background:#d9e4d6;align-self:flex-end}.chatrow{display:flex;gap:8px}.chatrow input{flex:1;min-width:0}.breath{text-align:center;background:#f1e2c3;border-radius:18px;padding:17px}.orb{width:112px;height:112px;border-radius:50%;margin:12px auto;background:radial-gradient(circle at 35% 30%,#fff8d8,#d7b65e);display:grid;place-items:center;color:#51418e;font-weight:800;transition:transform 4s ease}.orb.expand{transform:scale(1.28)}.timer{font-size:1.5rem;font-weight:800;margin:8px}.journal-status{font-size:.82rem;color:#6a5ba5;margin-top:8px}
+footer{max-width:1080px;margin:0 auto 35px;padding:0 22px;color:var(--muted);font-size:.8rem;line-height:1.6}.help{background:#f1dfbd;border:1px solid #b98c50;border-radius:18px;padding:18px;margin-top:18px}.help strong{color:#8b3d58}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.hero{padding:28px 23px}.moods{gap:5px}.mood{padding:9px 2px}.mood small{font-size:.65rem}}
+
+.egypt-mark{font-size:1.3rem;color:#f1ca79;letter-spacing:7px;margin-top:17px;text-shadow:0 2px 5px #24170f}
+.game-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px 0}
+.game-tile{min-height:58px;border:1px solid #b38a4d;border-radius:10px;background:linear-gradient(145deg,#fff3d7,#d9bd83);font-size:1.55rem;cursor:pointer;color:#45351d}
+.game-tile:focus-visible{outline:3px solid #167c78;outline-offset:2px}
+.game-tile.revealed,.game-tile.matched{background:#d8e4d2;border-color:#5c8870}
+.game-tile.matched{cursor:default;opacity:.8}
+.game-meta{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.85rem;color:#6b5a3d}
+.game-actions{display:flex;gap:8px;flex-wrap:wrap}
+.game-message{min-height:25px;color:#167c78;font-size:.88rem;margin-top:8px}
+
+
+.hero-art{position:absolute;right:0;bottom:0;width:min(58%,560px);height:100%;opacity:.96;pointer-events:none}
+.hero-art svg{width:100%;height:100%;display:block}
+.hero-copy{position:relative;z-index:1;max-width:570px;text-shadow:0 2px 8px #2b1a10}
+.card:before{content:"𓂀";position:absolute;right:16px;top:10px;color:#a77b3e;opacity:.22;font-size:1.3rem;pointer-events:none}
+.tag{color:#765538;font-weight:650}
+button.primary{background:#176b66;color:#fff;border:1px solid #c69b52}
+button.secondary{border:1px solid #b99a6a;background:#fff6e4;color:#60401f}
+input,textarea{border-color:#c5a878;background:#fffaf0}
+footer{color:#684f35}
+@media(max-width:700px){.hero{min-height:430px;padding:28px 22px 185px}.hero-art{width:100%;height:58%;opacity:.92}.hero-copy{max-width:100%}.hero h1{font-size:2rem}}
+
+
+.more-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px}
+.wide-card{margin-top:18px}
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.choice-pill{border:1px solid #b99a6a;background:#fff6e4;color:#60401f;border-radius:999px;padding:9px 13px;cursor:pointer}
+.choice-pill.selected{background:#176b66;color:white;border-color:#176b66}
+.feature-output{background:#f1e2c3;border:1px solid #d4bb8b;border-radius:13px;padding:13px;margin-top:12px;line-height:1.55;min-height:46px}
+.mini-label{font-size:.82rem;color:#765b39;font-weight:700;display:block;margin:10px 0 5px}
+.range-row{display:flex;align-items:center;gap:12px}.range-row input{flex:1;accent-color:#176b66}
+.step-list{display:grid;gap:8px}.step{padding:10px 12px;border-radius:12px;background:#f6ecd8;border:1px solid #d9c49a}
+.step.done{background:#dce9d9;border-color:#7ba18a}
+.affirmation{font-family:Georgia,serif;font-size:1.2rem;line-height:1.55;text-align:center;padding:20px 12px;color:#60401f}
+.timer-big{font-size:2.2rem;font-weight:850;text-align:center;color:#176b66;margin:8px}
+.progress-track{height:9px;background:#e2d2b2;border-radius:20px;overflow:hidden;margin:10px 0}.progress-fill{height:100%;width:0;background:#176b66;transition:width .3s}
+@media(max-width:700px){.more-grid{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<header><div class="brand">🌷 Cherry Mate <span>AI</span></div><div class="tag">𓋹 Moonlit Mind Sanctuary</div></header>
+<main>
+<section class="hero">
+<div class="hero-art" aria-hidden="true">
+<svg viewBox="0 0 560 310" role="img" aria-label="Moon rising behind an Egyptian pyramid">
+<circle cx="390" cy="91" r="65" fill="#f7d18a" opacity=".96"/>
+<circle cx="370" cy="72" r="9" fill="#d69c54" opacity=".32"/><circle cx="414" cy="106" r="13" fill="#d69c54" opacity=".3"/><circle cx="382" cy="124" r="7" fill="#d69c54" opacity=".35"/>
+<path d="M0 278 Q100 254 190 272 T560 268 V310 H0Z" fill="#3a281d"/>
+<path d="M105 278 L275 105 L452 278Z" fill="#b88752"/>
+<path d="M275 105 L452 278 L280 248Z" fill="#805332"/>
+<path d="M105 278 L275 105 L280 248Z" fill="#d0a06a"/>
+<path d="M153 232 L395 232 M132 253 L420 253 M181 204 L367 204 M205 180 L344 180 M230 155 L320 155" stroke="#70472c" stroke-width="3" opacity=".5"/>
+<path d="M0 286 Q120 275 250 287 T560 282" stroke="#d0a06a" stroke-width="2" fill="none" opacity=".5"/>
+<g fill="#e7c27d" opacity=".8"><circle cx="62" cy="70" r="2"/><circle cx="120" cy="42" r="1.5"/><circle cx="490" cy="46" r="2"/><circle cx="520" cy="130" r="1.5"/></g>
+</svg></div>
+<div class="hero-copy">
+<div class="eyebrow">✦ A moonlit sanctuary for your mind ✦</div>
+<h1>Find your calm beneath the desert moon.</h1>
+<p>Pause, explore your feelings, play gentle focus games, and talk things through with Cherry Mate.</p>
+<div class="egypt-mark" aria-hidden="true">𓂀　𓋹　𓆣　𓇳　𓊹</div>
+<div class="notice">A supportive wellbeing project — not a therapist, diagnosis, or emergency service.</div>
+</div></section>
+<div class="grid">
+<section class="card"><h2>🌈 How are you feeling?</h2><p class="sub">Choose the feeling that is closest to yours right now.</p>
+<div class="moods">
+<button class="mood" data-mood="Happy"><b>😊</b><small>Happy</small></button><button class="mood" data-mood="Sad"><b>😢</b><small>Sad</small></button><button class="mood" data-mood="Anxious"><b>😟</b><small>Anxious</small></button><button class="mood" data-mood="Angry"><b>😠</b><small>Angry</small></button><button class="mood" data-mood="Tired"><b>😴</b><small>Tired</small></button>
+</div><div class="result" id="moodResult" aria-live="polite">Your check-in will appear here. Every feeling is okay.</div>
+</section>
+<section class="card"><h2>💬 Cherry Mate chat</h2><p class="sub">A simple guided reflection chat. You can share as much or as little as you like.</p>
+<div class="chatlog" id="chatlog"><div class="bubble bot">Hi! I'm Cherry Mate. What's been on your mind today?</div></div>
+<div class="chatrow"><input id="chatInput" maxlength="500" placeholder="Type how you're feeling…" aria-label="Your message"><button class="primary" id="sendBtn">Send</button></div>
+<p class="journal-status">Exhibition prototype: this chat uses built-in supportive responses, not a live AI connection. No messages are sent to a server.</p>
+</section>
+<section class="card"><h2>🌬️ One-minute breathing break</h2><p class="sub">Follow the circle: breathe in as it grows, then breathe out as it shrinks. Stop if you feel uncomfortable.</p>
+<div class="breath"><div class="orb" id="orb">Ready</div><div class="timer" id="timer">01:00</div><div id="breathText">Take a comfortable position.</div><button class="primary" id="breathBtn">Start breathing</button> <button class="secondary" id="resetBreath">Reset</button></div>
+</section>
+<section class="card"><h2>📖 Private reflection journal</h2><p class="sub">Write a few words about your day. Your entry stays in this browser on this device.</p>
+<textarea id="journal" maxlength="2000" placeholder="Today, I'm feeling…"></textarea><button class="primary" id="saveJournal">Save on this device</button> <button class="secondary" id="clearJournal">Clear</button><div class="journal-status" id="journalStatus" aria-live="polite"></div>
+</section>
+</div>
+
+<section class="card" style="margin-top:18px">
+<h2>𓆣 Calm Quest — mindful mini-games</h2>
+<p class="sub">Take a gentle break with these simple focus games inspired by ancient Egyptian symbols. No scores to compete over — just a little playful reset.</p>
+<div class="game-meta"><span>Memory Match: find all matching pairs</span><span id="moves">Moves: 0</span></div>
+<div class="game-grid" id="memoryGrid" aria-label="Memory matching game"></div>
+<div class="game-actions"><button class="primary" type="button" id="newGame">New game</button></div>
+<div class="game-message" id="gameMessage" aria-live="polite">Turn over two tiles and try to remember where each symbol is.</div>
+<hr style="border:0;border-top:1px solid #eadfbe;margin:18px 0">
+<h2>✨ Stargazer — a 30-second focus pause</h2>
+<p class="sub">Tap the little stars as they appear. Focus on one thing at a time, and enjoy the pause.</p>
+<div class="game-meta"><span id="starScore">Stars found: 0</span><span id="starTime">Time: 30s</span></div>
+<div id="starPlayArea" style="height:145px;border-radius:16px;background:radial-gradient(circle at 50% 45%,#315d59,#183d3b);position:relative;overflow:hidden;margin:12px 0">
+<button type="button" id="starTarget" aria-label="Tap the star" style="display:none;position:absolute;border:0;background:transparent;font-size:30px;cursor:pointer">⭐</button>
+<div id="starHint" style="color:#fff4d2;text-align:center;padding-top:55px;font-size:.9rem">Press Start, then tap each star.</div>
+</div>
+<div class="game-actions"><button class="primary" type="button" id="startStars">Start focus game</button><button class="secondary" type="button" id="stopStars">Stop</button></div>
+<div class="game-message" id="starMessage" aria-live="polite"></div>
+</section>
+
+
+<section class="wide-card card">
+<h2>𓋹 Your daily oasis</h2>
+<p class="sub">A gentle check-in to notice what you need today. There are no good or bad answers.</p>
+<div class="more-grid" style="margin-top:0">
+  <div>
+    <label class="mini-label" for="energyLevel">How much energy do you have?</label>
+    <div class="range-row"><span>Low</span><input id="energyLevel" type="range" min="1" max="5" value="3"><span>High</span></div>
+    <div id="energyText" class="feature-output">Energy level: 3/5 — take things at a comfortable pace.</div>
+  </div>
+  <div>
+    <label class="mini-label" for="todayIntention">One gentle intention for today</label>
+    <input id="todayIntention" maxlength="120" placeholder="e.g. Be patient with myself">
+    <button class="primary" id="saveIntention" type="button">Save today's intention</button>
+    <div class="journal-status" id="intentionStatus" aria-live="polite"></div>
+  </div>
+</div>
+</section>
+
+<div class="more-grid">
+<section class="card">
+<h2>✨ The affirmation temple</h2>
+<p class="sub">Choose a theme and receive a small reminder to carry with you.</p>
+<div class="pill-row" id="affirmationThemes">
+<button class="choice-pill selected" data-theme="calm" type="button">Calm</button>
+<button class="choice-pill" data-theme="confidence" type="button">Confidence</button>
+<button class="choice-pill" data-theme="kindness" type="button">Self-kindness</button>
+</div>
+<div class="affirmation" id="affirmationText" aria-live="polite">I can take one moment at a time. I do not have to solve everything today.</div>
+<button class="primary" id="newAffirmation" type="button">Another reminder</button>
+</section>
+
+<section class="card">
+<h2>🌿 The self-care menu</h2>
+<p class="sub">Pick the time you have and get a simple, realistic reset idea.</p>
+<div class="pill-row" id="timeChoices">
+<button class="choice-pill selected" data-time="2" type="button">2 minutes</button>
+<button class="choice-pill" data-time="5" type="button">5 minutes</button>
+<button class="choice-pill" data-time="10" type="button">10 minutes</button>
+</div>
+<div class="feature-output" id="selfCareIdea" aria-live="polite">Relax your shoulders, sip some water, and look out of a window for a moment.</div>
+<button class="primary" id="newSelfCare" type="button">Give me another idea</button>
+</section>
+
+<section class="card">
+<h2>🪷 Gratitude papyrus</h2>
+<p class="sub">Write down up to three small things you appreciated today. They do not need to be big.</p>
+<input id="gratitudeInput" maxlength="140" placeholder="Something I'm grateful for…">
+<button class="primary" id="addGratitude" type="button">Add to my jar</button>
+<ul id="gratitudeList" style="padding-left:22px;line-height:1.7"></ul>
+<div class="journal-status" id="gratitudeStatus" aria-live="polite">Your gratitude notes stay in this browser.</div>
+</section>
+
+<section class="card">
+<h2>🧭 5–4–3–2–1 grounding path</h2>
+<p class="sub">A gentle sensory exercise that can help you reconnect with the present moment. Move through one step at a time.</p>
+<div class="step-list" id="groundingSteps">
+<div class="step">5 things you can see</div><div class="step">4 things you can feel</div><div class="step">3 things you can hear</div><div class="step">2 things you can smell</div><div class="step">1 thing you can taste</div>
+</div>
+<button class="primary" id="nextGrounding" type="button">Mark first step complete</button>
+<button class="secondary" id="resetGrounding" type="button">Start again</button>
+<div class="journal-status" id="groundingStatus" aria-live="polite">Take your time. You can skip any step.</div>
+</section>
+</div>
+
+<section class="wide-card card">
+<h2>⏳ Quiet focus chamber</h2>
+<p class="sub">Choose a short focus period for reading, homework, drawing, tidying, or simply resting. This timer does not lock your screen.</p>
+<div class="pill-row" id="focusChoices">
+<button class="choice-pill selected" data-minutes="1" type="button">1 minute</button>
+<button class="choice-pill" data-minutes="5" type="button">5 minutes</button>
+<button class="choice-pill" data-minutes="10" type="button">10 minutes</button>
+<button class="choice-pill" data-minutes="15" type="button">15 minutes</button>
+</div>
+<div class="timer-big" id="focusClock">01:00</div>
+<div class="progress-track"><div class="progress-fill" id="focusProgress"></div></div>
+<div style="text-align:center">
+<button class="primary" id="focusStart" type="button">Start focus</button>
+<button class="secondary" id="focusPause" type="button">Pause</button>
+<button class="secondary" id="focusReset" type="button">Reset</button>
+</div>
+<div class="journal-status" id="focusStatus" aria-live="polite">One small step is enough to begin.</div>
+</section>
+
+<section class="wide-card card">
+<h2>𓂀 Little wisdom of ancient Egypt — mini quiz</h2>
+<p class="sub">A tiny knowledge break inspired by the symbols in this theme. Choose an answer to reveal a short fact.</p>
+<div id="egyptQuizQuestion" style="font-weight:750;margin:10px 0">Which symbol is commonly known as the Ankh?</div>
+<div class="pill-row" id="egyptQuizOptions">
+<button class="choice-pill" data-answer="eye" type="button">The eye symbol</button>
+<button class="choice-pill selected" data-answer="ankh" type="button">The cross-like loop symbol</button>
+<button class="choice-pill" data-answer="scarab" type="button">The beetle symbol</button>
+</div>
+<button class="primary" id="checkEgyptAnswer" type="button">Check answer</button>
+<div class="feature-output" id="egyptQuizResult" aria-live="polite">Hint: it is often associated with life.</div>
+</section>
+
+<section class="help"><strong>Need support right now?</strong><br>If you feel unsafe, might hurt yourself, or someone is hurting you, please tell a trusted adult immediately and contact local emergency services. In India, call <b>112</b> for emergency help. You do not have to handle a difficult moment alone.</section>
+</main>
+<footer>Cherry Mate AI is a school demonstration of wellbeing features. It cannot diagnose, treat, or replace a qualified mental-health professional. Avoid entering identifying or highly private information. Journal entries are stored locally in this browser; clearing browser data may erase them.</footer>
+<script>
+const tips={
+ Happy:"It's lovely that you're feeling happy. What is one small thing you would like to remember about this moment?",
+ Sad:"I'm sorry things feel heavy. You don't have to force yourself to feel better. Would it help to talk to someone you trust or do one gentle thing for yourself?",
+ Anxious:"Try naming five things you can see, four you can feel, and three you can hear. Take it one small step at a time.",
+ Angry:"Pause before reacting if you can. Unclench your hands, step away for a moment, and think about what boundary or need might be underneath the anger.",
+ Tired:"Rest is productive too. Could you drink some water, stretch gently, or take a short break?"
+};
+document.querySelectorAll(".mood").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll(".mood").forEach(b=>b.classList.remove("active"));btn.classList.add("active");document.getElementById("moodResult").textContent=tips[btn.dataset.mood]}));
+const log=document.getElementById("chatlog"), input=document.getElementById("chatInput");
+function reply(s){let t=s.toLowerCase();if(/hurt myself|kill myself|suicid|end my life|don't want to live/.test(t))return "I'm really glad you told me. Please go to a trusted adult right now—parent, teacher, school counsellor or another safe person—and tell them plainly that you may not be safe. If there is immediate danger in India, call 112. Please don't stay alone with this.";if(/anx|panic|stress|worry|scared/.test(t))return "That sounds stressful. Let's slow it down: put both feet on the floor, relax your shoulders, and take one comfortable slow breath. What is the one thing worrying you most right now?";if(/sad|lonely|cry|upset/.test(t))return "That sounds painful. You deserve kindness, especially from yourself. Is there someone safe you could talk with today? If you'd like, tell me what happened.";if(/angry|mad|furious/.test(t))return "It makes sense to need a pause when emotions are strong. If possible, step away briefly and give yourself time before responding. What happened?";if(/happy|excited|good/.test(t))return "I'm glad there's something good in your day. What made you smile?";if(/school|exam|study|teacher/.test(t))return "School pressure can feel like a lot. Try choosing just one small next step, then take a short break. What feels most urgent?";return "Thank you for sharing that with me. I can't know exactly what this is like for you, but I can help you reflect. What part of it feels hardest right now?"}
+function send(){let s=input.value.trim();if(!s)return;add(s,"user");input.value="";setTimeout(()=>add(reply(s),"bot"),250)}
+function add(s,kind){let d=document.createElement("div");d.className="bubble "+kind;d.textContent=s;log.appendChild(d);log.scrollTop=log.scrollHeight}
+document.getElementById("sendBtn").onclick=send;input.addEventListener("keydown",e=>{if(e.key==="Enter")send()});
+let remaining=60,interval=null,phase=0;const timer=document.getElementById("timer"),orb=document.getElementById("orb"),bt=document.getElementById("breathText"),bb=document.getElementById("breathBtn");
+function paint(){timer.textContent=`${String(Math.floor(remaining/60)).padStart(2,"0")}:${String(remaining%60).padStart(2,"0")}`}
+function stopBreath(){clearInterval(interval);interval=null;orb.classList.remove("expand");bb.textContent="Start breathing"}
+bb.onclick=()=>{if(interval)return;bb.textContent="Pause";let elapsed=0;interval=setInterval(()=>{remaining--;elapsed++;let inhale=(elapsed%8)<4;orb.classList.toggle("expand",inhale);orb.textContent=inhale?"Breathe in":"Breathe out";bt.textContent=inhale?"Breathe in gently":"Breathe out slowly";paint();if(remaining<=0){stopBreath();orb.textContent="Well done";bt.textContent="You completed your minute. Notice how you feel.";bb.textContent="Start again";remaining=60;paint()}},1000)};
+document.getElementById("resetBreath").onclick=()=>{stopBreath();remaining=60;paint();orb.textContent="Ready";bt.textContent="Take a comfortable position."};
+const journal=document.getElementById("journal"), status=document.getElementById("journalStatus");try{journal.value=localStorage.getItem("cherrymateJournal")||""}catch(e){}
+document.getElementById("saveJournal").onclick=()=>{try{localStorage.setItem("cherrymateJournal",journal.value);status.textContent="Saved on this device ✓"}catch(e){status.textContent="Could not save in this browser."}};
+document.getElementById("clearJournal").onclick=()=>{journal.value="";try{localStorage.removeItem("cherrymateJournal")}catch(e){}status.textContent="Journal cleared from this browser."};
+
+// Calm Quest: local memory-match game
+(function(){
+ const symbols=["𓂀","𓋹","𓆣","𓇳","𓊹","𓃭","𓅃","𓆑"];
+ const grid=document.getElementById("memoryGrid"),movesEl=document.getElementById("moves"),msg=document.getElementById("gameMessage");
+ if(!grid)return;
+ let deck=[],first=null,lock=false,moves=0,matched=0;
+ function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+ function start(){deck=shuffle([...symbols,...symbols]);first=null;lock=false;moves=0;matched=0;movesEl.textContent="Moves: 0";msg.textContent="Turn over two tiles and try to remember where each symbol is.";grid.innerHTML="";
+ deck.forEach((sym,i)=>{let b=document.createElement("button");b.type="button";b.className="game-tile";b.textContent="?";b.setAttribute("aria-label","Hidden tile "+(i+1));b.addEventListener("click",()=>flip(b,i));grid.appendChild(b);});}
+ function flip(btn,i){if(lock||btn.classList.contains("matched")||btn===first)return;btn.textContent=deck[i];btn.classList.add("revealed");btn.setAttribute("aria-label","Tile "+deck[i]);if(!first){first=btn;return;}moves++;movesEl.textContent="Moves: "+moves;if(first.textContent===btn.textContent){first.classList.remove("revealed");btn.classList.remove("revealed");first.classList.add("matched");btn.classList.add("matched");first=null;matched+=2;if(matched===deck.length)msg.textContent="Beautiful focus! You found every pair in "+moves+" moves. Try another round or take a calming breath.";else msg.textContent="A match! Keep going at your own pace.";}else{lock=true;let old=first;first=null;msg.textContent="Not a match — take a moment to remember their places.";setTimeout(()=>{old.textContent="?";btn.textContent="?";old.classList.remove("revealed");btn.classList.remove("revealed");old.setAttribute("aria-label","Hidden tile");btn.setAttribute("aria-label","Hidden tile");lock=false;},750);}}
+ document.getElementById("newGame").addEventListener("click",start);start();
+})();
+// Stargazer: short, gentle attention game
+(function(){
+ const area=document.getElementById("starPlayArea"),target=document.getElementById("starTarget"),hint=document.getElementById("starHint"),scoreEl=document.getElementById("starScore"),timeEl=document.getElementById("starTime"),message=document.getElementById("starMessage");
+ if(!area)return;let score=0,left=30,tick=null,running=false;
+ function place(){let maxX=Math.max(0,area.clientWidth-48),maxY=Math.max(0,area.clientHeight-48);target.style.left=(Math.random()*maxX)+"px";target.style.top=(Math.random()*maxY)+"px";}
+ function stop(done){clearInterval(tick);tick=null;running=false;target.style.display="none";hint.style.display="block";hint.textContent=done?"Lovely work. Take one slow breath before you continue.":"Paused. You can start again whenever you like.";message.textContent=done?"You found "+score+" stars. There is no right score — the pause is the point.":"";}
+ function start(){clearInterval(tick);score=0;left=30;running=true;scoreEl.textContent="Stars found: 0";timeEl.textContent="Time: 30s";message.textContent="";hint.style.display="none";target.style.display="block";place();tick=setInterval(()=>{left--;timeEl.textContent="Time: "+left+"s";if(left<=0)stop(true);},1000);}
+ target.addEventListener("click",()=>{if(!running)return;score++;scoreEl.textContent="Stars found: "+score;place();});
+ document.getElementById("startStars").addEventListener("click",start);document.getElementById("stopStars").addEventListener("click",()=>{if(running)stop(false);});
+})();
+
+
+// Daily oasis energy check-in and intention
+(function(){
+ const range=document.getElementById("energyLevel"),txt=document.getElementById("energyText");
+ const phrases=["Very low energy — choose one tiny task and allow yourself rest.","Low energy — keep your plans gentle and manageable.","Steady energy — take things at a comfortable pace.","Good energy — you may have room for one extra small goal.","High energy — use your energy kindly; remember to take breaks."];
+ function update(){txt.textContent="Energy level: "+range.value+"/5 — "+phrases[Number(range.value)-1];}
+ range.addEventListener("input",update);update();
+ const intent=document.getElementById("todayIntention"),status=document.getElementById("intentionStatus");
+ try{intent.value=localStorage.getItem("cherrymateIntention")||"";}catch(e){}
+ document.getElementById("saveIntention").addEventListener("click",()=>{try{localStorage.setItem("cherrymateIntention",intent.value);status.textContent="Your intention is saved on this device ✓";}catch(e){status.textContent="This browser could not save it.";}})
+})();
+
+// Affirmation generator
+(function(){
+ const sets={
+ calm:["I can take one moment at a time. I do not have to solve everything today.","A pause is useful. Rest is allowed.","I can return to my breath whenever I need a reset.","Small steps still move me forward."],
+ confidence:["I am learning, and learning takes time.","I can try even when I feel unsure.","My effort matters more than perfection.","I have handled difficult moments before."],
+ kindness:["I deserve the same kindness I give to others.","My feelings are real, and I can meet them gently.","I do not need to compare my path with anyone else's.","It is okay to ask for help."]
+ };
+ let theme="calm",last=-1;const out=document.getElementById("affirmationText");
+ function next(){let a=sets[theme],n=Math.floor(Math.random()*a.length);if(a.length>1&&n===last)n=(n+1)%a.length;last=n;out.textContent=a[n];}
+ document.querySelectorAll("#affirmationThemes button").forEach(b=>b.addEventListener("click",()=>{theme=b.dataset.theme;last=-1;document.querySelectorAll("#affirmationThemes button").forEach(x=>x.classList.toggle("selected",x===b));next();}));
+ document.getElementById("newAffirmation").addEventListener("click",next);
+})();
+
+// Self-care suggestions
+(function(){
+ const ideas={
+ 2:["Relax your shoulders, sip some water, and look out of a window for a moment.","Take five slow, comfortable breaths and unclench your jaw.","Stretch your hands and neck gently, without forcing anything.","Put one small item back in its place, then pause."],
+ 5:["Step outside or near a window and notice the sky, light, and sounds.","Make a warm or cool drink and enjoy it without multitasking.","Write down one thing on your mind and one tiny next step.","Listen to a favourite calming song and let your body relax."],
+ 10:["Take a gentle walk and notice five details around you.","Tidy one small corner, then stop when the timer ends.","Draw, doodle, or colour without worrying about the result.","Read a few pages of something you enjoy."]
+ };
+ let mins="2",last=-1;const out=document.getElementById("selfCareIdea");
+ function next(){let a=ideas[mins],n=Math.floor(Math.random()*a.length);if(a.length>1&&n===last)n=(n+1)%a.length;last=n;out.textContent=a[n];}
+ document.querySelectorAll("#timeChoices button").forEach(b=>b.addEventListener("click",()=>{mins=b.dataset.time;last=-1;document.querySelectorAll("#timeChoices button").forEach(x=>x.classList.toggle("selected",x===b));next();}));
+ document.getElementById("newSelfCare").addEventListener("click",next);
+})();
+
+// Gratitude notes, saved locally
+(function(){
+ const input=document.getElementById("gratitudeInput"),list=document.getElementById("gratitudeList"),status=document.getElementById("gratitudeStatus");let items=[];
+ function render(){list.innerHTML="";items.forEach((v,i)=>{let li=document.createElement("li");li.textContent=v+" ";let b=document.createElement("button");b.type="button";b.className="secondary";b.textContent="Remove";b.style.padding="3px 8px";b.addEventListener("click",()=>{items.splice(i,1);save();});li.appendChild(b);list.appendChild(li);});}
+ function save(){try{localStorage.setItem("cherrymateGratitude",JSON.stringify(items));status.textContent="Saved on this device · "+items.length+"/3 notes";}catch(e){status.textContent="Could not save in this browser.";}render();}
+ try{items=JSON.parse(localStorage.getItem("cherrymateGratitude")||"[]");if(!Array.isArray(items))items=[];}catch(e){items=[];}render();
+ document.getElementById("addGratitude").addEventListener("click",()=>{let v=input.value.trim();if(!v){status.textContent="Write a small thing first.";return;}if(items.length>=3){status.textContent="Your jar has three notes. Remove one to add another.";return;}items.push(v);input.value="";save();});
+})();
+
+// Grounding steps
+(function(){
+ const steps=[...document.querySelectorAll("#groundingSteps .step")],status=document.getElementById("groundingStatus"),btn=document.getElementById("nextGrounding");let i=0;
+ function paint(){steps.forEach((s,n)=>s.classList.toggle("done",n<i));btn.textContent=i>=5?"Completed — start again":"Mark next step complete";status.textContent=i===0?"Take your time. You can skip any step.":i>=5?"You reached the end. Notice how you feel, without judging it.":"Step "+i+" of 5 complete. Continue whenever you're ready.";}
+ btn.addEventListener("click",()=>{if(i<5)i++;paint();});document.getElementById("resetGrounding").addEventListener("click",()=>{i=0;paint();});
+})();
+
+// Focus timer
+(function(){
+ let total=60,left=60,interval=null,running=false;
+ const clock=document.getElementById("focusClock"),bar=document.getElementById("focusProgress"),status=document.getElementById("focusStatus");
+ function draw(){clock.textContent=String(Math.floor(left/60)).padStart(2,"0")+":"+String(left%60).padStart(2,"0");bar.style.width=((total-left)/total*100)+"%";}
+ function stop(){clearInterval(interval);interval=null;running=false;}
+ document.querySelectorAll("#focusChoices button").forEach(b=>b.addEventListener("click",()=>{stop();total=Number(b.dataset.minutes)*60;left=total;document.querySelectorAll("#focusChoices button").forEach(x=>x.classList.toggle("selected",x===b));status.textContent="Timer set. Start whenever you are ready.";draw();}));
+ document.getElementById("focusStart").addEventListener("click",()=>{if(running)return;if(left<=0)left=total;running=true;status.textContent="You're in your focus time. One thing at a time.";interval=setInterval(()=>{left--;draw();if(left<=0){stop();status.textContent="Your focus session is complete. Take a small stretch or water break."; }},1000);});
+ document.getElementById("focusPause").addEventListener("click",()=>{if(running){stop();status.textContent="Paused. Resume whenever you like.";}});document.getElementById("focusReset").addEventListener("click",()=>{stop();left=total;draw();status.textContent="Timer reset. One small step is enough to begin.";});draw();
+})();
+
+// Egyptian symbol mini quiz
+(function(){
+ const result=document.getElementById("egyptQuizResult");let answer="ankh";
+ document.querySelectorAll("#egyptQuizOptions button").forEach(b=>b.addEventListener("click",()=>{answer=b.dataset.answer;document.querySelectorAll("#egyptQuizOptions button").forEach(x=>x.classList.toggle("selected",x===b));}));
+ document.getElementById("checkEgyptAnswer").addEventListener("click",()=>{result.textContent=answer==="ankh"?"Correct! The Ankh is an ancient Egyptian symbol often associated with life.":"Not quite. The Ankh is the looped cross-like symbol, often associated with life. Try another round by choosing a different answer.";});
+})();
+
+</script>
+</body></html>
