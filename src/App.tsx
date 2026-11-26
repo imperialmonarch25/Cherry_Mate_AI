@@ -403,7 +403,7 @@ function App() {
             <iframe
               ref={iframeRef}
               className="sanctuary-iframe"
-              src="/cherry-mate-sanctuary.html"
+              src="./cherry-mate-sanctuary.html"
               title="Interactive Cherry Mate AI Moonlit Egyptian Sanctuary"
               sandbox="allow-scripts allow-same-origin"
               allow="fullscreen"

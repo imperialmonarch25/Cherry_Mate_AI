@@ -23,11 +23,13 @@ Create a production build with `npm run build`.
 
 ## GitHub Pages and custom domain
 
-The `main` branch deploys automatically to GitHub Pages through
-`.github/workflows/deploy-pages.yml`. After the first successful deployment,
-set `cherrymateai.bond` under the repository's **Settings → Pages → Custom
-domain**. At the domain registrar, point the apex (`@`) to GitHub Pages with
-these A records:
+First, a repository administrator must open **Settings → Pages** and set
+**Build and deployment → Source** to **GitHub Actions**. Then pushes to `main`
+deploy automatically through `.github/workflows/deploy-pages.yml`.
+
+In the same Pages settings, add `cherrymateai.bond` as the custom domain. At
+the domain registrar, point the apex (`@`) to GitHub Pages with these A
+records:
 
 ```text
 185.199.108.153
