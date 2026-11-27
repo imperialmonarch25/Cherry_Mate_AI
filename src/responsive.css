@@ -1,85 +1,105 @@
-/* Additional layout safeguards for narrow tablets and touch-first devices. */
-@media (min-width: 681px) and (max-width: 820px) {
-  .topbar {
-    padding-right: 5%;
-    padding-left: 5%;
-    gap: 14px;
-  }
-
-  .top-nav {
-    gap: clamp(12px, 2.5vw, 22px);
-    margin-right: 4px;
-  }
-
-  .nav-cta {
-    padding-right: 12px;
-    padding-left: 12px;
-  }
-
-  .hero-section {
-    min-height: 500px;
-    padding-right: 5%;
-    padding-left: 5%;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
-    column-gap: 12px;
-  }
-
-  .hero-section h1 {
-    font-size: clamp(42px, 6vw, 58px);
-  }
-
-  .moon-scene {
-    min-width: 0;
-    margin-right: -6%;
-    margin-left: -4%;
-  }
-}
-
+/* Mobile phone safeguards and touch-first layout fixes. */
 @media (max-width: 680px) {
-  .topbar {
-    padding-right: 6%;
-    padding-left: 6%;
-  }
-
-  .top-nav {
-    flex-shrink: 0;
-  }
-
-  .hero-section,
-  .section-wrap {
+  html,
+  body,
+  #root,
+  .site-shell {
     width: 100%;
     max-width: 100%;
+  }
+
+  body {
+    min-width: 280px;
+    overflow-x: hidden;
+  }
+
+  .topbar {
+    min-height: calc(67px + env(safe-area-inset-top));
+    padding-top: env(safe-area-inset-top);
+    padding-right: max(6%, env(safe-area-inset-right));
+    padding-left: max(6%, env(safe-area-inset-left));
   }
 
   .hero-section {
-    min-height: max(725px, 100svh);
+    min-height: max(700px, calc(100svh - 67px));
   }
 
-  .sanctuary-frame {
-    min-width: 0;
-  }
-
-  .frame-controls .bubble-button {
-    min-height: 40px;
-    padding-right: 11px;
-    padding-left: 11px;
-  }
-
-  .sanctuary-iframe {
-    width: 100%;
-    max-width: 100%;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
+  .hero-actions .bubble-button,
+  .frame-controls .bubble-button,
+  .support-aside .bubble-button {
+    min-height: 44px;
   }
 
   .feature-filter {
-    overscroll-behavior-inline: contain;
-    -webkit-overflow-scrolling: touch;
+    width: auto;
+    max-width: 100%;
+  }
+
+  .sanctuary-section {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .sanctuary-frame {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .frame-toolbar {
+    position: relative;
+  }
+
+  .frame-controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .frame-controls .frame-control {
+    width: 100%;
+  }
+
+  .sanctuary-iframe {
+    height: 75svh;
+    min-height: 520px;
+  }
+
+  .frame-expanded .sanctuary-iframe {
+    height: 88svh;
+    min-height: 600px;
+  }
+
+  .site-footer {
+    padding-right: max(7%, env(safe-area-inset-right));
+    padding-bottom: calc(15px + env(safe-area-inset-bottom));
+    padding-left: max(7%, env(safe-area-inset-left));
   }
 }
 
-@media (hover: none) {
-  .bubble-button:hover {
-    transform: none;
+@media (max-width: 380px) {
+  .topbar {
+    padding-right: 4%;
+    padding-left: 4%;
+  }
+
+  .hero-section h1 {
+    font-size: clamp(46px, 14vw, 54px);
+  }
+
+  .frame-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .sanctuary-heading h2,
+  .section-heading h2,
+  .support-copy h2 {
+    overflow-wrap: break-word;
+  }
+}
+
+@media (max-height: 620px) and (orientation: landscape) {
+  .sanctuary-iframe,
+  .frame-expanded .sanctuary-iframe {
+    height: 100svh;
+    min-height: 420px;
   }
 }
